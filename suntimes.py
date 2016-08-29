@@ -20,6 +20,10 @@ def arcsine(x):
     return math.degrees(math.asin(math.radians(x)))
 
 
+def arccos(x):
+    return math.degrees(math.acos(math.radians(x)))
+
+
 def cos(x):
     return math.degrees(math.cos(math.radians(x)))
 
@@ -38,10 +42,9 @@ def calculateSunrise():
     lmbda = (M + C + 180 + 102.9372) % 360
     Jtransit = Jstar + 0.0053 * sin(M) - 0.0069 * sin(2 * lmbda)
     print(Jtransit)
-    delta = math.degrees(
-        math.asin(math.sin(math.radians(lmbda)) * math.sin(math.radians(23.44))))
-    wnot = math.degrees(math.acos((math.sin(math.radians(-0.83)) - math.sin(math.radians(phi)) *
-                                   math.sin(math.radians(delta))) / (math.cos(math.radians(phi)) * math.cos(math.radians(delta)))))
+    delta = arcsine(sin(lmbda) * sin(23.44))
+    wnot = arccos((sin(-0.83) - sin(phi) * sin(delta)) /
+                  (cos(phi) * cos(delta)))
     print(Jstar - Jtransit - wnot / 360)
 
 
