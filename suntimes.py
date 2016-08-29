@@ -29,11 +29,13 @@ def cos(x):
 
 
 def calculateSunrise():
+    # http://williams.best.vwh.net/sunrise_sunset_algorithm.htm
     lw = 80.85  # longitude west
     phi = 37.72
     Jdate = calculateJulianDate()
     print(Jdate)
     n = Jdate - 2451545.0 + 0.0008
+    print(n)
     Jstar = lw / 360 + n
     print(Jstar)
     M = (357.5291 + 0.98560028 * Jstar) % 360
@@ -42,10 +44,12 @@ def calculateSunrise():
     lmbda = (M + C + 180 + 102.9372) % 360
     Jtransit = Jstar + 0.0053 * sin(M) - 0.0069 * sin(2 * lmbda)
     print(Jtransit)
-    delta = arcsine(sin(lmbda) * sin(23.44))
-    wnot = arccos((sin(-0.83) - sin(phi) * sin(delta)) /
-                  (cos(phi) * cos(delta)))
-    print(Jstar - Jtransit - wnot / 360)
+    delta = arcsine(math.degrees(math.radians(
+        sin(lmbda)) * math.radians(sin(23.44))))
+    wnot = arccos((sin(-0.83) - math.degrees(math.radians(sin(phi)) * math.radians(sin(delta)))) /
+                  math.degrees(math.radians(cos(phi)) * math.radians(cos(delta))))
+    print(wnot)
+    print(Jtransit + wnot / 360)
 
 
 def calculateJulianDate():
